@@ -14,6 +14,7 @@ namespace AssemblyCSharp
 {
 	public class Listener : ConnectionRequestListener, LobbyRequestListener, ZoneRequestListener, RoomRequestListener, ChatRequestListener, UpdateRequestListener, NotifyListener
 	{
+		GameObject obj;
 		int state = 0;
 		string debug = "";
 		
@@ -231,11 +232,16 @@ namespace AssemblyCSharp
 		public void onUserLeftRoom (RoomData eventObj, string username)
 		{
 			Log ("onUserLeftRoom : " + username);
+			obj.SetActive (false);
 		}
 		
 		public void onUserJoinedRoom (RoomData eventObj, string username)
 		{
 			Log ("onUserJoinedRoom : " + username);
+			if (username != PlayerController.username) {
+				obj = GameObject.CreatePrimitive (PrimitiveType.Capsule);
+				obj.transform.position = new Vector3 (0f, 0f, 0f);
+			}
 		}
 		
 		public void onUserLeftLobby (LobbyData eventObj, string username)
@@ -268,9 +274,11 @@ namespace AssemblyCSharp
 			Log(eventObj.getSender() + " sended " + eventObj.getMessage());
 			SimpleJSON.JSONNode msg =  SimpleJSON.JSON.Parse(eventObj.getMessage());
 			//msg[0] 
-			if(eventObj.getSender() != appwarp.username)
+			if(eventObj.getSender() != PlayerController.username)
 			{
 				appwarp.movePlayer(msg["x"].AsFloat,msg["y"].AsFloat,msg["z"].AsFloat);
+				//obj.transform.position = Vector3.Lerp(obj.transform.position, new Vector3(msg["x"].AsFloat,msg["y"].AsFloat,msg["z"].AsFloat), Time.deltaTime);
+				obj.transform.position = new Vector3(msg["x"].AsFloat,msg["y"].AsFloat,msg["z"].AsFloat);
 				//Log(msg["x"].ToString()+" "+msg["y"].ToString()+" "+msg["z"].ToString());
 			}
 		}

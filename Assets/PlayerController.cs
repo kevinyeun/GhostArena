@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 	float updateInterval;
 	float timeSinceUpdate;
 	Listener listen = new Listener(); 
-
+	Vector3 prevPos;
 
 	// Use this for initialization
 	void Start ()
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
 		Debug.Log (WarpClient.GetInstance ().GetConnectionState() == WarpConnectionState.CONNECTING);
 		//EditorApplication.playmodeStateChanged += OnEditorStateChanged;
 		//addPlayer();
+		prevPos = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
 	}
 
 
@@ -86,10 +87,15 @@ public class PlayerController : MonoBehaviour
 		}
 
 		timeSinceUpdate += Time.deltaTime;
+
 		if (timeSinceUpdate > updateInterval) {
-			string json = "{\"x\":\""+transform.position.x+"\",\"y\":\""+transform.position.y+"\",\"z\":\""+transform.position.z+"\"}";
-			listen.sendMsg(json);
 			timeSinceUpdate = 0;
+			if (!new Vector3(transform.position.x, transform.position.y, transform.position.z).Equals(prevPos)) {
+				string json = "{\"x\":\""+transform.position.x+"\",\"y\":\""+transform.position.y+"\",\"z\":\""+transform.position.z+"\"}";
+				listen.sendMsg(json);
+				prevPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+			}
+
 		}
 
 		WarpClient.GetInstance().Update();
