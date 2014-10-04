@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
 			transform.position = new Vector3 (oldPos.x + 0.5f, oldPos.y, oldPos.z);
 		} else if (Input.GetKeyDown ("left")) {
 			transform.position = new Vector3 (oldPos.x - 0.5f, oldPos.y, oldPos.z);
+		} else if (Input.GetKeyDown ("up")) {
+			transform.position = new Vector3 (oldPos.x, oldPos.y + 0.5f, oldPos.z);
+		} else if (Input.GetKeyDown ("down")) {
+			transform.position = new Vector3 (oldPos.x, oldPos.y - 0.5f, oldPos.z);
 		}
 	}
 }
