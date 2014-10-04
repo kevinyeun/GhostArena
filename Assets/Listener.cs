@@ -20,6 +20,7 @@ namespace AssemblyCSharp
 		private void Log(string msg)
 		{
 			debug = msg + "\n" + debug;
+			Debug.Log (msg);
 		}
 
 		public string getDebug()
@@ -35,6 +36,7 @@ namespace AssemblyCSharp
 				WarpClient.GetInstance().SubscribeRoom(appwarp.roomid);
 			}
 			Log ("onConnectDone : " + eventObj.getResult());
+			WarpClient.GetInstance ().GetOnlineUsers ();
 		}
 
 		public void onInitUDPDone(byte res)
