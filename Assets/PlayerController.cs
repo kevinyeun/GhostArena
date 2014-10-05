@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 	public static GameObject addPlayer(string username, float x, float y, float z) {
 		GameObject obj = (GameObject) Instantiate(Resources.Load("MainPlayer"));
 		obj.transform.position = new Vector3 (x, y, z);
-		Debug.Log ("AS;KJFNADFKJNF;KFE;DFJNBKDSFJNADS",obj);
+		Debug.Log (usernameToPlayer == null);
 		//usernameToPlayer[username] = obj;
 		return obj;
 	}
