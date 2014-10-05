@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
 
 	public static GameObject addPlayer(string username, float x, float y, float z) {
-		GameObject obj = (GameObject) Instantiate(Resources.Load ("prefab"));//GameObject.CreatePrimitive (PrimitiveType.Capsule);
+		GameObject obj = (GameObject) Instantiate(Resources.Load("Player"));
 		obj.transform.position = new Vector3 (x, y, z);
 		Debug.Log ("AS;KJFNADFKJNF;KFE;DFJNBKDSFJNADS",obj);
 		usernameToPlayer[username] = obj;
