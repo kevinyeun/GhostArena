@@ -13,7 +13,7 @@ using AssemblyCSharp;
 
 public class PlayerController : MonoBehaviour
 {
-	public static Dictionary<string,GameObject> usernameToPlayer;
+	public static Dictionary<string,GameObject> usernameToPlayer = new Dictionary<string,GameObject> ();
 	float updateInterval;
 	float timeSinceUpdate;
 	Listener listen = new Listener(); 
@@ -24,8 +24,7 @@ public class PlayerController : MonoBehaviour
 	{
 		updateInterval = 0.1f;
 		timeSinceUpdate = 0f;
-
-		usernameToPlayer = new Dictionary<string,GameObject> ();
+		
 		prevPos = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
 	}
 
@@ -34,7 +33,7 @@ public class PlayerController : MonoBehaviour
 		GameObject obj = (GameObject) Instantiate(Resources.Load("MainPlayer"));
 		obj.transform.position = new Vector3 (x, y, z);
 		Debug.Log (usernameToPlayer == null);
-		//usernameToPlayer[username] = obj;
+		usernameToPlayer[username] = obj;
 		return obj;
 	}
 
