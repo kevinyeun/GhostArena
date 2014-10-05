@@ -176,6 +176,7 @@ namespace AssemblyCSharp
 		public void onGetLiveRoomInfoDone (LiveRoomInfoEvent eventObj)
 		{
 			Log ("onGetLiveRoomInfoDone : " + eventObj.getResult());
+			Log (eventObj.getData().ToString());
 		}
 		
 		public void onSetCustomRoomDataDone (LiveRoomInfoEvent eventObj)
@@ -238,7 +239,7 @@ namespace AssemblyCSharp
 		public void onUserJoinedRoom (RoomData eventObj, string username)
 		{
 			Log ("onUserJoinedRoom : " + username);
-			if (username != PlayerController.username) {
+			if (username != GameController.username) {
 				obj = GameObject.CreatePrimitive (PrimitiveType.Capsule);
 				obj.transform.position = new Vector3 (0f, 0f, 0f);
 			}
@@ -274,7 +275,7 @@ namespace AssemblyCSharp
 			Log(eventObj.getSender() + " sended " + eventObj.getMessage());
 			SimpleJSON.JSONNode msg =  SimpleJSON.JSON.Parse(eventObj.getMessage());
 			//msg[0] 
-			if(eventObj.getSender() != PlayerController.username)
+			if(eventObj.getSender() != GameController.username)
 			{
 				appwarp.movePlayer(msg["x"].AsFloat,msg["y"].AsFloat,msg["z"].AsFloat);
 				//obj.transform.position = Vector3.Lerp(obj.transform.position, new Vector3(msg["x"].AsFloat,msg["y"].AsFloat,msg["z"].AsFloat), Time.deltaTime);
