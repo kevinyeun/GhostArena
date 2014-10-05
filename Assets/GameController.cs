@@ -20,13 +20,12 @@ public class GameController : MonoBehaviour {
 	public static string roomid = "1015565096";
 	public static string username;
 	public static GameObject player;
+	Transform mainCamera;
 
 	
 	Listener listen = new Listener();
 
-	public Transform mainCamera;
-	public static int NUM_TILES = 9;
-	public static float speed = 0.03f*5f / NUM_TILES;
+	public static float speed = 0.1f;
 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +47,7 @@ public class GameController : MonoBehaviour {
 		//EditorApplication.playmodeStateChanged += OnEditorStateChanged;
 		//addPlayer();
 		player = PlayerController.addPlayer(username, 0f, 0f, 0f);
+		mainCamera = player.GetComponentInChildren< Camera >().transform;
 		initializePlayers();
 	}
 

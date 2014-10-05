@@ -14,10 +14,6 @@ using AssemblyCSharp;
 public class PlayerController : MonoBehaviour
 {
 	public static Dictionary<string,GameObject> usernameToPlayer;
-	static int NUM_TILES = 9;
-	public Transform background;
-	public Transform mainCamera;
-	float speed;
 	float updateInterval;
 	float timeSinceUpdate;
 	Listener listen = new Listener(); 
@@ -26,9 +22,6 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
-		transform.localScale = new Vector3 (1f / NUM_TILES, 1f / NUM_TILES, 1);
-		speed = 0.03f*5f / NUM_TILES;
 		updateInterval = 0.1f;
 		timeSinceUpdate = 0f;
 
@@ -38,10 +31,10 @@ public class PlayerController : MonoBehaviour
 
 
 	public static GameObject addPlayer(string username, float x, float y, float z) {
-		GameObject obj = (GameObject) Instantiate(Resources.Load("Player"));
+		GameObject obj = (GameObject) Instantiate(Resources.Load("MainPlayer"));
 		obj.transform.position = new Vector3 (x, y, z);
 		Debug.Log ("AS;KJFNADFKJNF;KFE;DFJNBKDSFJNADS",obj);
-		usernameToPlayer[username] = obj;
+		//usernameToPlayer[username] = obj;
 		return obj;
 	}
 
